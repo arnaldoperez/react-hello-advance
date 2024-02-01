@@ -6,13 +6,9 @@ import { useStore } from "../hooks/useStore";
 export const Single = props => {
 	const { demo } = useStore()
 	const { theId } = useParams()
-	// Note: The the basic form is => const params = useParams();
-	// As well const store = useStore();
-	// We prefeer the destructuring form in some cases
-	// useStore is a Custom Hook! to replace the usual form to use context 
 
 	return (
-		<div className="jumbotron">
+		<div className="container text-center">
 			<h1 className="display-4">This will show the demo element: {demo[theId].title}</h1>
 			<img src={rigoImageUrl} />
 			<hr className="my-4" />

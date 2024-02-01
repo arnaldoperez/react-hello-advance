@@ -10,7 +10,7 @@ export const Demo = () => {
 	return (
 		<div className="container">
 			<ul className="list-group">
-				{store.demo.map((item, index) => {
+				{store && store.demo?.map((item, index) => {
 					return (
 						<li
 							key={index}
@@ -23,7 +23,7 @@ export const Demo = () => {
 							// Check to see if the background is orange, if so, display the message
 							item.background === "orange" ? (
 								<p style={{ color: item.initial }}>
-									Check store/flux.js scroll to the actions to see the code
+									Open file ./actions.js to see the action code that is updating this color
 								</p>
 							) : null}
 							<button className="btn btn-success" onClick={() => changeColor(index, "orange")}>

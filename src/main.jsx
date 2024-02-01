@@ -1,10 +1,40 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import Layout from './Layout.jsx'
 import './index.css'
+import {  RouterProvider } from "react-router-dom";
+import { createContext } from 'react';
+// This is where all your routes are located
+import { router } from "./routes";
+import { useGlobalState } from "./hooks/useGlobalState";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <Layout />
-  </React.StrictMode>,
-)
+export const Context = createContext(null)
+
+const defaultState = {
+  message: null,
+  demo: [
+    {
+      title: "FIRST",
+      background: "white",
+      initial: "white"
+    },
+    {
+      title: "SECOND",
+      background: "white",
+      initial: "white"
+    }
+  ]
+}
+
+const Main = () => {
+  const globalState = useGlobalState(defaultState)
+  if(window) window.globalState = globalState;
+  return (
+    <React.StrictMode>  
+      <Context.Provider value={globalState}>
+          <RouterProvider router={router} />
+      </Context.Provider>
+    </React.StrictMode>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<Main />)

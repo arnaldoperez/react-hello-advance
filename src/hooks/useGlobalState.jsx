@@ -1,21 +1,22 @@
 import { useState } from 'react';
-import { globalState } from '../context/globalState';
+import actions from '../actions';
 
+export const useGlobalState = (defaultStoreValue) => {
+    const [globalState, setGlobalState] = useState({
+        store: defaultStoreValue,
+        actions: actions({
+            getStore: () => globalState.store,
+            getActions: () => globalState.actions,
+            setStore: updatedStore =>
+                setGlobalState({
+                    store: {
+                        ...globalState.store,
+                        ...updatedStore
+                    },
+                    actions: globalState.actions,
+                })
+        })
+    });
 
-
-export const useGlobalState = () => {
-    const [state, setState] = useState(globalState({
-        getStore: () => state.store,
-        getActions: () => state.actions,
-        setStore: updatedStore =>
-            setState({
-                store: {
-                    ...state.store,
-                    ...updatedStore
-                },
-                actions: state.actions,
-            })
-    }));
-
-    return state;
+    return globalState;
 };

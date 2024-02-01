@@ -9,7 +9,7 @@ import { useGlobalState } from "./hooks/useGlobalState";
 
 export const Context = createContext(null)
 
-const defaultState = {
+const defaultGlobalState = {
   message: null,
   demo: [
     {
@@ -26,7 +26,7 @@ const defaultState = {
 }
 
 const Main = () => {
-  const globalState = useGlobalState(defaultState)
+  const globalState = useGlobalState(defaultGlobalState)
   if(window) window.globalState = globalState;
   return (
     <React.StrictMode>  

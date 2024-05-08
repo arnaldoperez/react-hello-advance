@@ -1,22 +1,8 @@
-import { useState } from 'react';
-import actions from '../actions';
+import { useReducer } from 'react';
+import { reducer } from '../actions';
 
 export const useGlobalState = (defaultStoreValue) => {
-    const [globalState, setGlobalState] = useState({
-        store: defaultStoreValue,
-        actions: actions({
-            getStore: () => globalState.store,
-            getActions: () => globalState.actions,
-            setStore: updatedStore =>
-                setGlobalState({
-                    store: {
-                        ...globalState.store,
-                        ...updatedStore
-                    },
-                    actions: globalState.actions,
-                })
-        })
-    });
-
-    return globalState;
+    const [store, dispatch] = useReducer(reducer, defaultStoreValue);
+    return { store , dispatch };
 };
+

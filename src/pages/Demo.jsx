@@ -1,11 +1,20 @@
 import { Link } from "react-router-dom";
-import { useActions } from "../hooks/useActions";
+import { useDispatch } from "../hooks/useDispatch";
 import { useStore } from "../hooks/useStore";
 
 export const Demo = () => {
 	const store = useStore();
-	const { changeColor } = useActions();
+	const dispatch = useDispatch()
 	// Note: as we see in the Single view, we can use the destructuring form for our code.
+
+	const changeColor = (index,color) =>{
+		const demo = store.demo.map((elm, i) => {
+			if (i === index) elm.background = color;
+			return elm;
+		});
+		return demo
+	}
+
 
 	return (
 		<div className="container">
@@ -26,7 +35,7 @@ export const Demo = () => {
 									Open file ./actions.js to see the action code that is updating this color
 								</p>
 							) : null}
-							<button className="btn btn-success" onClick={() => changeColor(index, "orange")}>
+							<button className="btn btn-success" onClick={()=> dispatch({type:"change_color",nextDemo:changeColor(index,"orange")}) }>
 								Change Color
 							</button>
 						</li>

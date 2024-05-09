@@ -16,9 +16,9 @@ export const router = createBrowserRouter(
     // Note: The child paths of the BaseHome element replace the Outlet component with the elements contained in the "element" attribute of these child paths.
 
       <Route path="/" element={<BaseHome />} errorElement={<h1>Not found!</h1>} >
+        <Route path= "/" element={<Home />} />
         <Route path="/single/:theId" element={ <Single />} />
         <Route path="/demo" element={<Demo />} />
-        <Route path= "/" element={<Home />} />
       </Route>
     )
 );

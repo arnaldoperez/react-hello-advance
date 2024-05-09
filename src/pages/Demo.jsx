@@ -1,10 +1,8 @@
 import { Link } from "react-router-dom";
-import { useDispatch } from "../hooks/useDispatch";
-import { useStore } from "../hooks/useStore";
+import useGlobalReducer from "../hooks/useGlobalReducer";
 
 export const Demo = () => {
-	const store = useStore();
-	const dispatch = useDispatch()
+  const {store, dispatch}=useGlobalReducer()
 	// Note: as we see in the Single view, we can use the destructuring form for our code.
 
 	const changeColor = (index,color) =>{
@@ -32,7 +30,7 @@ export const Demo = () => {
 							// Check to see if the background is orange, if so, display the message
 							item.background === "orange" ? (
 								<p style={{ color: item.initial }}>
-									Open file ./actions.js to see the action code that is updating this color
+									Open file ./store.js to see the global store that contains and updates the list of colors
 								</p>
 							) : null}
 							<button className="btn btn-success" onClick={()=> dispatch({type:"change_color",nextDemo:changeColor(index,"orange")}) }>
